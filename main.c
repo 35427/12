@@ -189,7 +189,7 @@ int main(int argc, char *argv[]) {
 		}
 			 
 	} 
-	while(game_end() ==0);
+	while(game_end() == 0);
 	//모든 플레이어가 PLAYERSTATUS_LIVE가 아니면 종료
 	
 	
