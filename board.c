@@ -7,6 +7,8 @@
 #define N_COINPOS		12 //12칸에 코인 배치 
 #define MAX_COIN		4 //최대 4개를 놓을 것 
 
+#define SHARK_INITPOS	-4
+#define MAX_SHARKSTEP	6
 static int board_status[N_BOARD];
 static int board_coin[N_BOARD];
 
@@ -20,6 +22,8 @@ int board_initboard(void){
 		board_status[i] = BOARDSTATUS_OK;
 		board_coin[i] = 0;
 	}
+	
+	board_sharkPosition = SHARK_INITPOS;
 	
 	for(i=0; i<N_COINPOS; i++){
 		int flag = 0;
@@ -55,7 +59,17 @@ int board_getBoardCoin(int pos){
 }
 //int board_getSharkPosition(void);
 
-//int board_stepShark(void);
+int board_stepShark(void){
+	int step = rand()%MAX_SHARKSTEP+1;
+	int i;
+	for(i=+1;i<=shark_position+step;i++){
+		if (i>=0 && i<N_BOARD)
+		board_status[i] = BOARDSTATUS_NOK;
+		
+	}
+	shark_position += step;
+	return shark_position;
+}
 int board_getBoardStatus(int pos){
 	return board_status[pos];
 }
