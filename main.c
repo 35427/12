@@ -176,6 +176,7 @@ int main(int argc, char *argv[]) {
 		//2-4. 동전 줍기
 		coinResult = board_getBoardCoin(pos);
 		player_coin[turn] += coinResult;
+		printf("get coin %d!\n", coinResult);
 		//printf() 
 		//2-5. 다음 턴
 		turn = (turn + 1)%N_PLAYER; //wrap around
