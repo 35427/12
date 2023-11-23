@@ -113,7 +113,7 @@ int game_end(void){
 int main(int argc, char *argv[]) {
 	int pos = 0;
 	int i;
-	int turn;
+	int turn = 0;
 	srand((unsigned)(time(NULL)));
 	//0. opening
 	opening();
@@ -129,6 +129,7 @@ int main(int argc, char *argv[]) {
 	printf("Player %i's name : ", i);
 	scanf("%s", player_name[i]);
 	}
+
 	
 	//2. 반복문 (플레이어 턴)
 	do{
@@ -149,7 +150,7 @@ int main(int argc, char *argv[]) {
 	
 		pos += step;
 		
-		coinResult = board_getBoardCoin(pos);
+		
 		printf("press any key to continue:");
 		scanf("%d", &c);
 		fflush(stdin);
@@ -188,7 +189,7 @@ int main(int argc, char *argv[]) {
 		}
 			 
 	} 
-	while(game_end() == 0);
+	while(game_end() ==0);
 	//모든 플레이어가 PLAYERSTATUS_LIVE가 아니면 종료
 	
 	
@@ -196,14 +197,18 @@ int main(int argc, char *argv[]) {
 	
 
 	// 3. 정리(승자 계산, 출력 등)
+	if(game_end()){
+	
 int alivePlayers = getAlivePlayer();
 int winner = getWinner();
 printf("Game is end!\n"); 
 printf("생존 플레이어 수: %d\n", alivePlayers);
 printf("동전이 가장 많은 플레이어 번호: %d\n", winner);
+}
 
 	 //getAlivePlayer();
 	 //getWinner();
 	
 	return 0;
 }
+

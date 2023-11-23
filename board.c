@@ -55,7 +55,9 @@ int board_printBoardStatus(void){
 
 int board_getBoardCoin(int pos){
 	int coin = board_coin[pos];
+	
 	board_coin[pos] = 0;
+	
 	return coin;
 }
 int board_getSharkPosition(void);
