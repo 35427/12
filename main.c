@@ -150,6 +150,45 @@ int main(int argc, char *argv[]) {
 		}
 			 
 	} while (1);
+	
+	int game_end(void){
+		int i;
+		int flag_end = 1;
+		//if all the players are died?
+		for (i=0; i<N_PLAYER; i++){
+			if (player_status[i] == PLAYERSTATUS_LIVE){
+				flag_end = 0;
+				break;
+			}
+		}
+		return flag_end;
+	}
+	
+	int getAlivePlayer(void){
+		int i;
+		int cnt = 0;
+		for (i=0; i<N_PLAYER; i++){
+			if (player_status[i] == PLAYERSTATUS_END)
+			cnt++;
+		}
+		return cnt;
+	}
+	
+	int getWinner(void){
+		int i;
+		int winner = 0;
+		int max_coin = -1;
+		
+		for (i=0; i<N_PLAYER; i++){
+			if (player_coin[i] > max_coin){
+				max_coin = player_coin[i];
+				winner = i;
+			}
+		}
+		return winner;
+	}
+	
+	
 	//3. 정리(승자 계산, 출력 등) 
 	 
 	

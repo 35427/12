@@ -14,6 +14,7 @@ static int board_coin[N_BOARD];
 
 static int board_sharkPosition;
 
+int shark_position;
 
 
 int board_initboard(void){
