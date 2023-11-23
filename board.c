@@ -58,12 +58,12 @@ int board_getBoardCoin(int pos){
 	board_coin[pos] = 0;
 	return coin;
 }
-//int board_getSharkPosition(void);
+int board_getSharkPosition(void);
 
 int board_stepShark(void){
 	int step = rand()%MAX_SHARKSTEP+1;
 	int i;
-	for(i=+1;i<=shark_position+step;i++){
+	for(i= shark_position + 1;i<=shark_position+step;i++){
 		if (i>=0 && i<N_BOARD)
 		board_status[i] = BOARDSTATUS_NOK;
 		
