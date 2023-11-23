@@ -60,7 +60,7 @@ void printPlayerStatus(void){
 	int i;
 	printf("player status ---\n");
 	for (i=0; i<N_PLAYER; i++){
-		printf("%s : pos %i, coin %i, status : %s ", player_name[i], player_position[i], player_coin[i], player_statusString[player_status[i]]);
+		printf("%s : pos %i, coin %i, status : %s\n", player_name[i], player_position[i], player_coin[i], player_statusString[player_status[i]]);
 	}
 	printf("------------------\n");
 }
@@ -72,11 +72,48 @@ void checkDie(void){
 			player_status[i] = PLAYERSTATUS_DIE;
 		}
 	}
-}
+}	
+int game_end(void){
+		int i;
+		int flag_end = 1;
+		//if all the players are died?
+		for (i=0; i<N_PLAYER; i++){
+			if (player_status[i] == PLAYERSTATUS_LIVE){
+				flag_end = 0;
+				break;
+			}
+		}
+		return flag_end;
+	}
+	
+	int getAlivePlayer(void){
+		int i;
+		int cnt = 0;
+		for (i=0; i<N_PLAYER; i++){
+			if (player_status[i] == PLAYERSTATUS_END)
+			cnt++;
+		}
+		return cnt;
+	}
+	
+	int getWinner(void){
+		int i;
+		int winner = 0;
+		int max_coin = -1;
+		
+		for (i=0; i<N_PLAYER; i++){
+			if (player_coin[i] > max_coin){
+				max_coin = player_coin[i];
+				winner = i;
+			}
+		}
+		return winner;
+	}
+	
 int main(int argc, char *argv[]) {
 	int pos = 0;
-	int i, turn;
-	
+	int i;
+	int turn;
 	srand((unsigned)(time(NULL)));
 	//0. opening
 	opening();
@@ -92,6 +129,7 @@ int main(int argc, char *argv[]) {
 	printf("Player %i's name : ", i);
 	scanf("%s", player_name[i]);
 	}
+	
 	//2. 반복문 (플레이어 턴)
 	do{
 		int step = rolldie();
@@ -150,49 +188,22 @@ int main(int argc, char *argv[]) {
 		}
 			 
 	} 
-	while(1);
+	while(game_end() == 0);
+	//모든 플레이어가 PLAYERSTATUS_LIVE가 아니면 종료
 	
 	
-	int game_end(void){
-		int i;
-		int flag_end = 1;
-		//if all the players are died?
-		for (i=0; i<N_PLAYER; i++){
-			if (player_status[i] == PLAYERSTATUS_LIVE){
-				flag_end = 0;
-				break;
-			}
-		}
-		return flag_end;
-	}
+
 	
-	int getAlivePlayer(void){
-		int i;
-		int cnt = 0;
-		for (i=0; i<N_PLAYER; i++){
-			if (player_status[i] == PLAYERSTATUS_END)
-			cnt++;
-		}
-		return cnt;
-	}
-	
-	int getWinner(void){
-		int i;
-		int winner = 0;
-		int max_coin = -1;
-		
-		for (i=0; i<N_PLAYER; i++){
-			if (player_coin[i] > max_coin){
-				max_coin = player_coin[i];
-				winner = i;
-			}
-		}
-		return winner;
-	}
-	
-	
-	//3. 정리(승자 계산, 출력 등) 
-	 
+
+	// 3. 정리(승자 계산, 출력 등)
+int alivePlayers = getAlivePlayer();
+int winner = getWinner();
+printf("Game is end!\n"); 
+printf("생존 플레이어 수: %d\n", alivePlayers);
+printf("동전이 가장 많은 플레이어 번호: %d\n", winner);
+
+	 //getAlivePlayer();
+	 //getWinner();
 	
 	return 0;
 }
