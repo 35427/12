@@ -24,7 +24,7 @@ int board_initboard(void){
 		board_coin[i] = 0;
 	}
 	
-	board_sharkPosition = SHARK_INITPOS;
+	int board_getSharkPosition = SHARK_INITPOS;
 	
 	for(i=0; i<N_COINPOS; i++){
 		int flag = 0;
